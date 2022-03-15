@@ -26,3 +26,11 @@ update_cut_pieces, UPDATE, cut_report, BEGIN
     FROM Numbers
     WHERE NumberID <= new.BundleQuantity;
 END, AFTER, 2022-02-15 13:46:47.34, STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION, root@%, utf8mb4, utf8mb4_0900_ai_ci, utf8mb4_0900_ai_ci
+
+
+
+
+CREATE TABLE `numbers` (
+  `NumberID` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`NumberID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
