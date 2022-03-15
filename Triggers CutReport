@@ -1,0 +1,28 @@
+'insert_cut_pieces', 'INSERT', 'cut_report', 'BEGIN\n    INSERT INTO Piece_Wise_Cut_Report(BundleID,PieceNumber)\n    SELECT new.BundleID,NumberID\n    FROM Numbers\n    WHERE NumberID <= new.BundleQuantity;\nEND', 'AFTER', '2022-02-15 13:46:47.32', 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION', 'root@%', 'utf8mb4', 'utf8mb4_0900_ai_ci', 'utf8mb4_0900_ai_ci'
+'update_cut_pieces', 'UPDATE', 'cut_report', 'BEGIN\n    DELETE FROM Piece_Wise_Cut_Report\n    WHERE BundleID = new.BundleID;\n\n    INSERT INTO Piece_Wise_Cut_Report(BundleID,PieceNumber)\n    SELECT new.BundleID,NumberID\n    FROM Numbers\n    WHERE NumberID <= new.BundleQuantity;\nEND', 'AFTER', '2022-02-15 13:46:47.34', 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION', 'root@%', 'utf8mb4', 'utf8mb4_0900_ai_ci', 'utf8mb4_0900_ai_ci'
+
+'insert_cut_pieces'
+'INSERT'
+'cut_report'
+insert_cut_pieces, INSERT, cut_report, BEGIN
+    INSERT INTO Piece_Wise_Cut_Report(BundleID,PieceNumber)
+    SELECT new.BundleID,NumberID
+    FROM Numbers
+    WHERE NumberID <= new.BundleQuantity;
+END, AFTER, 2022-02-15 13:46:47.32, STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION, root@%, utf8mb4, utf8mb4_0900_ai_ci, utf8mb4_0900_ai_ci
+'AFTER'
+
+
+
+'update_cut_pieces'
+'UPDATE'
+'cut_report'
+update_cut_pieces, UPDATE, cut_report, BEGIN
+    DELETE FROM Piece_Wise_Cut_Report
+    WHERE BundleID = new.BundleID;
+
+    INSERT INTO Piece_Wise_Cut_Report(BundleID,PieceNumber)
+    SELECT new.BundleID,NumberID
+    FROM Numbers
+    WHERE NumberID <= new.BundleQuantity;
+END, AFTER, 2022-02-15 13:46:47.34, STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION, root@%, utf8mb4, utf8mb4_0900_ai_ci, utf8mb4_0900_ai_ci
