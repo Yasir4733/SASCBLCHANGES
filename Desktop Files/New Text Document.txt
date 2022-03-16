@@ -1,0 +1,23 @@
+SELECT session_id
+FROM sys.dm_exec_sessions
+WHERE login_name =  'Admin3';
+
+
+
+kill 68;
+
+DROP LOGIN Admin3;
+
+
+
+
+
+USE [ApperalSooperWizer];
+GO
+
+CREATE USER Api FOR LOGIN [Admin3];
+GO
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA :: Essentials to Api;
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA :: Data to Api;
+GO
