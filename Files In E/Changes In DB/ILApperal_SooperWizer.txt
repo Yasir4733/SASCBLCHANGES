@@ -1,0 +1,58 @@
+-- USE `ilapparel_sooperwizer`;
+
+
+-- deparid is nullable in operation table
+ 
+-- ALTER TABLE department
+-- ADD COLUMN CreatedAt DATETIME DEFAULT (CURRENT_TIMESTAMP),
+-- ADD COLUMN UpdatedAt DATETIME DEFAULT (CURRENT_TIMESTAMP);
+
+-- ALTER TABLE operation
+-- ADD COLUMN DepartmentID INT,
+-- ADD COLUMN SMV FLOAT,
+-- ADD CONSTRAINT FK_operation_department
+-- FOREIGN KEY (DepartmentID) REFERENCES department(DepartmentID);
+
+-- ALTER TABLE `ilapparel_sooperwizer`.`operation` 
+-- DROP COLUMN `Department`;
+
+
+
+-- CREATE TABLE IF NOT EXISTS department(
+--	DepartmentID INT NOT NULL AUTO_INCREMENT,
+--	DepartmentName VARCHAR(40) NOT NULL,
+--	CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--	UpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--	PRIMARY KEY (DepartmentID));
+
+
+-- CREATE TABLE IF NOT EXISTS cutting_table(
+-- 	CuttingTableID INT NOT NULL AUTO_INCREMENT,
+--     CuttingTableCode VARCHAR(40) NOT NULL,  
+--     CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- 	UpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     PRIMARY KEY (CuttingTableID));
+--    
+-- CREATE TABLE IF NOT EXISTS cutting_manpower(
+-- 	CuttingManpowerID INT NOT NULL AUTO_INCREMENT,
+--     CuttingTableID INT NOT NULL,
+--     CuttingManpowerDate DATE NOT NULL,
+--     Manpower FLOAT NOT NULL,
+--     Shift ENUM('Morning', 'Evening', 'Night') NOT NULL,
+-- 	CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- 	UpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     PRIMARY KEY (CuttingManpowerID),
+--     CONSTRAINT FK_cutting_manpower_cutting_table
+-- 	FOREIGN KEY (CuttingTableID) REFERENCES cutting_table(CuttingTableID)
+--     );  
+
+
+-- ALTER TABLE cut_report
+-- ADD COLUMN Embellishment bit(1) DEFAULT (0);
+
+
+
+-- ALTER TABLE style_bulletin
+-- ADD COLUMN SMV FLOAT,
+-- ADD COLUMN PieceRate FLOAT,
+-- ADD COLUMN IsCritical bit(1) DEFAULT 0;

@@ -1,0 +1,53 @@
+
+
+ALTER TABLE sooperwizer_demo.piece_wise_cut_report
+ADD COLUMN StyleTemplateID INT,
+ADD CONSTRAINT FK_PieceWiseCutReport_StyleTemplate
+FOREIGN KEY (StyleTemplateID) REFERENCES style_template(StyleTemplateID);
+
+
+-- =====================================================
+-- =====================================================
+
+USE `sooperwizer_demo`;
+
+-- DROP TABLE IF EXISTS `end_line_fault_log`;
+-- DROP TABLE IF EXISTS `end_line_session`;
+
+-- CREATE TABLE IF NOT EXISTS end_line_session(
+-- EndLineSessionID INT NOT NULL AUTO_INCREMENT,
+-- LineID INT NOT NULL,
+-- SectionID INT NOT NULL,
+-- BundleID INT NOT NULL,
+-- PieceID INT NOT NULL,
+-- UserID INT NOT NULL,
+-- Status TINYINT NOT NULL DEFAULT 0,
+-- CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- UpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- CONSTRAINT PK_EndLineSessionNew PRIMARY KEY(EndLineSessionID),
+-- CONSTRAINT FK_EndLineSessionNew_Line FOREIGN KEY(LineID) REFERENCES line(LineID),
+-- CONSTRAINT FK_EndLineSessionNew_Section FOREIGN KEY(SectionID) REFERENCES section(SectionID),
+-- CONSTRAINT FK_EndLineSessionNew_CutReport FOREIGN KEY(BundleID) REFERENCES cut_report(BundleID),
+-- CONSTRAINT FK_EndLineSessionNew_PieceWiseCutReport FOREIGN KEY(PieceID) REFERENCES piece_wise_cut_report(PieceID),
+-- CONSTRAINT FK_EndLineSessionNew_User FOREIGN KEY(UserID) REFERENCES user(UserID),
+-- CONSTRAINT CK_EndLineSessionNew_Status CHECK(Status IN(0,1,2,3,4,5,6,7,8)));
+
+
+
+-- CREATE TABLE IF NOT EXISTS end_line_fault_log(
+-- EndLineFaultLogID INT NOT NULL AUTO_INCREMENT,
+-- EndLineSessionID INT NOT NULL,
+-- FaultID INT NOT NULL,
+-- FaultCount INT NOT NULL,
+-- PieceWiseScanningID INT NOT NULL,
+-- CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- UpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- CONSTRAINT PK_EndLineFaultLogNew PRIMARY KEY(EndLineFaultLogID),
+-- CONSTRAINT FK_EndLineFaultLogNew_EndLineSessionNew FOREIGN KEY(EndLineSessionID) REFERENCES end_line_session(EndLineSessionID),
+-- CONSTRAINT FK_EndLineFaultLogNew_Fault FOREIGN KEY(FaultID) REFERENCES fault(FaultID),
+-- CONSTRAINT FK_EndLineFaultLogNew_PieceWiseScan FOREIGN KEY(PieceWiseScanningID) REFERENCES piece_wise_scan(PieceWiseScanningID)
+-- );
+
+
+
+
