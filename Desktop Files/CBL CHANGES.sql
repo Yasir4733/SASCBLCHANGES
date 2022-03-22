@@ -160,3 +160,29 @@ CurrentStyleTemplateCode VARCHAR(64);
 
  ALTER TABLE [Essentials].[CutJob]
  ADD IsClosed BIT NOT NULL DEFAULT 0;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--  SooperWizer And SooperWizerQA Indus
+ALTER TABLE [Essentials].[Box] ADD  DEFAULT getdate() FOR IssueDate;
+ALTER TABLE [Essentials].[Box] ADD  DEFAULT getdate() FOR IssueDate;
+
+
+
+
+APPARELSOOPERWIZER
+
+  ALTER TABLE [Essentials].[CuttingManpower]
+  ADD LineID INT,
+  CONSTRAINT FK_CuttingManpower_Line FOREIGN KEY (LineID) REFERENCES [Essentials].[Line] (LineID);
+  
+  UPDATE [Essentials].[CuttingManpower]
+  SET LineID = 1
+  WHERE CuttingManpowerID = 6;
+
+  ALTER TABLE [Essentials].[CuttingManpower]
+ALTER COLUMN LineID INT NOT NULL;
