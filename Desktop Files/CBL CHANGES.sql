@@ -67,7 +67,15 @@ ADD IsActive BIT NOT NULL DEFAULT 1;
 
 
 
+USE [CBLQA];
 
+ALTER TABLE [Data].[TotalScanning]
+ADD
+CurrentStyleTemplateID INT ,
+CurrentStyleTemplateCode VARCHAR(64);
+
+ ALTER TABLE [Essentials].[CutJob]
+ ADD IsClosed BIT NOT NULL DEFAULT 0;
 
 -- ==============================================
 -- ==============================================
@@ -142,3 +150,13 @@ ADD IsActive BIT NOT NULL DEFAULT 1;
 USE [CBLQA]
 ALTER TABLE [Essentials].[ProductionOrder]
 DROP CONSTRAINT FK_ProductionOrder_StyleTempate;
+
+USE [CBLQA];
+
+ALTER TABLE [Data].[TotalScanning]
+ADD
+CurrentStyleTemplateID INT ,
+CurrentStyleTemplateCode VARCHAR(64);
+
+ ALTER TABLE [Essentials].[CutJob]
+ ADD IsClosed BIT NOT NULL DEFAULT 0;
