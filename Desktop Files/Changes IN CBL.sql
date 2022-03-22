@@ -79,7 +79,15 @@ ADD
 CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 UpdatedAt DATETIME NOT NULL DEFAULT GETDATE();
 
+USE [CBLQA];
 
+ALTER TABLE [Data].[TotalScanning]
+ADD
+CurrentStyleTemplateID INT ,
+CurrentStyleTemplateCode VARCHAR(64);
+
+ ALTER TABLE [Essentials].[CutJob]
+ ADD IsClosed BIT NOT NULL DEFAULT 0;
 
 -- ======================================================
 -- ======================================================
@@ -236,3 +244,30 @@ CONSTRAINT FK_CutReport_CuttingTable FOREIGN KEY (CuttingTableID) REFERENCES [Es
 ALTER TABLE [Essentials].[CutReport]
 ADD CuttingTableID INT 
 CONSTRAINT FK_CutReport_CuttingTable FOREIGN KEY (CuttingTableID) REFERENCES [Essentials].[CuttingTable](CuttingTableID);
+
+
+
+
+
+
+
+
+--  SooperWizer And SooperWizerQA Indus
+ALTER TABLE [Essentials].[Box] ADD  DEFAULT getdate() FOR IssueDate;
+ALTER TABLE [Essentials].[Box] ADD  DEFAULT getdate() FOR IssueDate;
+
+
+
+
+APPARELSOOPERWIZER
+
+  ALTER TABLE [Essentials].[CuttingManpower]
+  ADD LineID INT,
+  CONSTRAINT FK_CuttingManpower_Line FOREIGN KEY (LineID) REFERENCES [Essentials].[Line] (LineID);
+  
+  UPDATE [Essentials].[CuttingManpower]
+  SET LineID = 1
+  WHERE CuttingManpowerID = 6;
+
+  ALTER TABLE [Essentials].[CuttingManpower]
+ALTER COLUMN LineID INT NOT NULL;
