@@ -14,6 +14,21 @@ CREATE TABLE [Essentials].[PrintCutReport](
 
 
 
+USE [SooperWizer];
+
+ALTER TABLE [Essentials].[MarkerMapping] 
+ALTER COLUMN Size VARCHAR (32);
+
+USE [SooperWizerRT];
+
+ALTER TABLE [Essentials].[MarkerMapping] 
+ALTER COLUMN Size VARCHAR (32);
+
+USE [SooperWizerCP];
+
+ALTER TABLE [Essentials].[MarkerMapping] 
+ALTER COLUMN Size VARCHAR (32);
+
 
 -- Local
 -- ApparelSooperWizer 
