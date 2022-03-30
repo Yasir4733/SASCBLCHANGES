@@ -1,16 +1,7 @@
--- StyleTemplate
+  -- StyleTemplate
 DECLARE @ID INT;
 SET @ID = 1;
-DECLARE @num INT;
-DECLARE @num1 INT;
-DECLARE @num2 INT;
-DECLARE @numrows INT;
-
-SET @numrows = 1000;
-
--- StyleTemplate
-SET @ID = 1;
-WHILE @ID <= @numrows
+WHILE @ID <= 1000
 BEGIN
     INSERT INTO [Essentials].[StyleTemplate](StyleTemplateCode)
         VALUES('Stc-'+ CAST(@ID AS VARCHAR(30)))
@@ -18,14 +9,19 @@ BEGIN
     SET @ID = @ID + 1
 END
 
+
+
 -- Section
 INSERT INTO [Essentials].[Section](SectionCode,SectionDescription)
 VALUES('Sc-1','Primary'),('Sc-2','Back'),('Sc-3','Front'),('Sc-4','Assembly-1'),('Sc-5','Assembly-2');
 
 
 -- ScanGroup
-SET @ID = 1;
-WHILE @ID<=@numrows
+
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=1000
 BEGIN
     INSERT INTO [Essentials].[ScanGroup](CreatedAT,UpdatedAt)
     VALUES(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
@@ -33,9 +29,13 @@ BEGIN
     SET @ID = @ID+1;
 END
 
--- Line
-SET @ID = 1;
-WHILE @ID<=@numrows
+
+
+  -- Line
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=10
 BEGIN
     INSERT INTO [Essentials].[Line](LineCode,LineDescription)
     VALUES('L-'+ CAST(@ID AS VARCHAR(30)),'LineDescription-'+ CAST(@ID AS VARCHAR(30)));
@@ -45,8 +45,10 @@ END
 
 
 -- Worker
-SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=10000
 BEGIN
     INSERT INTO [Essentials].[Worker](WorkerCode,WorkerDescription)
     VALUES('W-'+ CAST(@ID AS VARCHAR(30)),'WorkerDescription-'+ CAST(@ID AS VARCHAR(30)));
@@ -56,8 +58,9 @@ END
 
 
 -- Module
+DECLARE @ID INT;
 SET @ID = 1;
-WHILE @ID <= @numrows
+WHILE @ID <= 10
 BEGIN
     INSERT INTO [Essentials].[Module](ModuleCode)
         VALUES('Mu-'+ CAST(@ID AS VARCHAR(30)))
@@ -67,8 +70,11 @@ END
 
 
 -- Box
-SET @ID = 1;
-WHILE @ID<=@numrows
+
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=10000
 BEGIN
     INSERT INTO [Essentials].[Box](BoxCode,IssueDate)
     VALUES('Boc-'+ CAST(@ID+20 AS VARCHAR(30)),GETDATE());
@@ -76,13 +82,24 @@ BEGIN
     SET @ID = @ID+1;
 END
 
+UPDATE child 
+SET
+child.BoxID = parent.MachineID
+from    [Essentials].[Machine] child (NOLOCK),     
+        [Essentials].[Machine] parent (NOLOCK)
+WHERE
+  child.MachineID = Parent.MachineID
 
 
 
 
--- MachineType
-SET @ID = 1;
-WHILE @ID<=@numrows
+
+
+  -- MachineType
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=20
 BEGIN
     INSERT INTO [Essentials].[MachineType](MachineTypeCode,MachineTypeDescription,Allowance)
     VALUES('Mtc-'+ CAST(@ID AS VARCHAR(30)),'MachineTypeDescription-'+ CAST(@ID AS VARCHAR(30)),ROUND(RAND()*(15-10)+10,2));
@@ -91,9 +108,11 @@ BEGIN
 END
 
 
--- SaleOrder
-SET @ID = 1;
-WHILE @ID<=@numrows
+  -- SaleOrder
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=1000
 BEGIN
     INSERT INTO [Essentials].[SaleOrder](SaleOrderCode,Customer,OrderQuantity)
     VALUES('Soc-'+ CAST(@ID AS VARCHAR(30)),'Customer-'+ CAST(@ID AS VARCHAR(30)),1000);
@@ -101,14 +120,17 @@ BEGIN
     SET @ID = @ID+1;
 END
 
--- Department
+  -- Department
 INSERT INTO [Essentials].[Department](DepartmentName)
 VALUES('PreWash'),('Wash'),('Packing'),('Shipping');
 
 
--- Operation
+  -- Operation
+DECLARE @ID INT;
 SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @num INT;
+
+WHILE @ID<=100
 BEGIN
     SET @num= CEILING(RAND()*4);
     INSERT INTO [Essentials].[Operation](OperationCode,OperationName,OperationDescription,PieceRate,OperationType,SectionID,DepartmentID,SMV)
@@ -118,10 +140,13 @@ BEGIN
     SET @ID = @ID+1;
 END;
 
+  -- TargetFeeding
 
--- TargetFeeding
+DECLARE @ID INT;
 SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @num INT;
+
+WHILE @ID<=10
 BEGIN
     SET @num= CEILING(RAND()*3);
     INSERT INTO [Essentials].[TargetFeeding](TargetDate,TargetShift,LineID,SectionID,PlanEfficiency,PlanProduction)
@@ -132,8 +157,12 @@ BEGIN
 END;
 
 -- ProductionOrder
+
+DECLARE @ID INT;
 SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @num INT;
+
+WHILE @ID<=100
 BEGIN
     SET @num= CEILING(RAND()*2);
     INSERT INTO [Essentials].[ProductionOrder](ProductionOrderCode,SaleOrderID,StyleTemplateID,IsFollowOperationSequence)
@@ -143,9 +172,12 @@ BEGIN
 END;
 
 
--- Marker
-SET @ID = 1;
-WHILE @ID<=@numrows
+  -- Marker
+
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=20
 BEGIN
     INSERT INTO [Essentials].[Marker](MarkerCode,ProductionOrderID)
     VALUES('Moc-'+ CAST(@ID AS VARCHAR(30)),@ID);
@@ -154,20 +186,24 @@ BEGIN
 END
 
 
--- [Essentials].[MarkerMapping]
-SET @ID = 1;  
-WHILE @ID<=@numrows
+-- [Essentials].[MarkerMapping]  
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=10
 BEGIN
     INSERT INTO [Essentials].[MarkerMapping](MarkerID,Size,Ratio,Inseam)
     VALUES(20,@ID,@ID,@ID);
     PRINT @ID;
     SET @ID = @ID+1;
 END
+  -- StyleBulletin
+DECLARE @ID INT;
+DECLARE @num INT;
+DECLARE @num1 INT;
+SET @ID =1;
 
-
--- StyleBulletin
-SET @ID = 1;
-WHILE @ID<=@numrows
+WHILE @ID<=100
 	BEGIN
     SET @num= CEILING(RAND()*2);
 	SET @num1= CEILING(RAND()*20);
@@ -179,22 +215,29 @@ END
 
 
 
---CutJob
-SET @ID = 1;
-WHILE @ID<=@numrows
+  --CutJob
+DECLARE @ID INT;
+SET @ID =1;
+DECLARE @num INT;
+DECLARE @num1 INT;
+
+WHILE @ID<=1000
 BEGIN
 	SET @num= CEILING(RAND()*2);
 	SET @num1= CEILING(RAND()*20);
     INSERT INTO [Essentials].[CutJob](CutNo,ProductionOrderID,CutQuantity,MarkerID)
-    VALUES('CutNo-'+ CAST(@ID AS VARCHAR(30)),1,100,CHOOSE(@num1, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20));
+    VALUES('CutNo-'+ CAST(@ID AS VARCHAR(30)),5,100,CHOOSE(@num1, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20));
     PRINT @ID;
     SET @ID = @ID+1;
 END
 
 
 -- CutReport
-SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @ID INT;
+DECLARE @num INT;
+SET @ID =1;
+
+WHILE @ID<=100
 BEGIN
     SET @num= CEILING(RAND()*4);
     INSERT INTO [Essentials].[CutReport](BundleCode,BundleQuantity,RemainingQuantity,CutJobID,StyleTemplateID)
@@ -204,9 +247,12 @@ BEGIN
 END
 
 
--- Machine
-SET @ID = 1;
-WHILE @ID<=@numrows
+  -- Machine
+DECLARE @ID INT;
+SET @ID =1;
+DECLARE @num1 INT;
+DECLARE @num2 INT;
+WHILE @ID<=1000
 BEGIN
 	SET @num1= CEILING(RAND()*20);
 	SET @num2= CEILING(RAND()*10);
@@ -218,8 +264,11 @@ END
 
 
 -- [Essentials].[Tag] 
-SET @ID = 1;
-WHILE @ID<=@numrows
+
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=1000
 BEGIN
     INSERT INTO [Essentials].[Tag](TagID,BundleID)
     VALUES(@ID,@ID);
@@ -227,9 +276,12 @@ BEGIN
     SET @ID = @ID+1;
 END
 
+
 -- [Essentials].[MachineOperations] 
-SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @ID INT;
+SET @ID =1;
+
+WHILE @ID<=100
 BEGIN
     INSERT INTO [Essentials].[MachineOperations](MachineID,OperationID)
     VALUES(@ID+400,@ID);
@@ -238,9 +290,14 @@ BEGIN
 END
 
 
+
+
 -- [Essentials].[AllocatedMachines]
-SET @ID = 1;
-WHILE @ID<=@numrows
+DECLARE @ID INT;
+
+SET @ID =1;
+
+WHILE @ID<=10000
 BEGIN
 
     INSERT INTO [Essentials].[AllocatedMachines](WorkerID,MachineID)
@@ -248,19 +305,53 @@ BEGIN
     PRINT @ID;
     SET @ID = @ID+1;
 END
-
-
-
-UPDATE child 
-SET
-child.BoxID = parent.MachineID
-from    [Essentials].[Machine] child (NOLOCK),     
-        [Essentials].[Machine] parent (NOLOCK)
-WHERE
-  child.MachineID = Parent.MachineID
-
 SELECT COUNT(*) FROM [Essentials].[AllocatedMachines]
 
+
+
+
+    -- [Essentials].[PieceWiseGroup]
+DECLARE @ID INT;
+SET @ID = 1;
+DECLARE @num INT;
+DECLARE @v1 INT;
+SET @v1 = 1;
+SET @num = 1
+
+WHILE @ID <= 10000
+BEGIN
+	IF @ID%101=0
+		BEGIN
+			SET @v1 = @v1 + 1 
+		END
+
+	IF @num%101=0
+		BEGIN
+			SET @num = 1 
+		END
+		
+	INSERT INTO [Essentials].[PieceWiseGroup](GroupID,BundleID,PieceID)
+	VALUES(@v1,@v1,@num)
+	
+	SET @ID = @ID + 1
+	SET @num = @num + 1
+
+END
+
+
+
+
+
+
+
+
+  UPDATE child 
+SET
+child.GroupID = parent.TagID
+from    [Essentials].[Tag] child (NOLOCK),     
+        [Essentials].[Tag] parent (NOLOCK)
+WHERE
+  child.TagID = Parent.TagID
 
 
 
@@ -274,15 +365,28 @@ CurrentStyleTemplateCode VARCHAR(64);
  ADD IsClosed BIT NOT NULL DEFAULT 0;
 
 
+-- TEST SUCCESS
+DECLARE @ID INT;
+SET @ID = 1;
+DECLARE @num INT;
+DECLARE @v1 INT;
+SET @v1 = 1;
+SET @num = 1
 
--- RESET DATABASE
-EXEC sp_MSForEachTable 'DISABLE TRIGGER ALL ON ?'
-GO
-EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'
-GO
-EXEC sp_MSForEachTable 'DELETE FROM ?'
-GO
-EXEC sp_MSForEachTable 'ALTER TABLE ? CHECK CONSTRAINT ALL'
-GO
-EXEC sp_MSForEachTable 'ENABLE TRIGGER ALL ON ?'
-GO
+WHILE @ID <= 100
+BEGIN
+	IF @ID%11=0
+		BEGIN
+			SET @v1 = @v1 + 1 
+		END
+
+	IF @num%11=0
+		BEGIN
+			SET @num = 1 
+		END
+	SELECT @v1 AS GID,@v1 AS BID, @num AS ID
+	SET @ID = @ID + 1
+	SET @num = @num + 1
+
+END
+
